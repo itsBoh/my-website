@@ -480,14 +480,14 @@
                                 </tr>
                             </table>
                             @endforeach
-                            @if($itemCount > 3)
+                            @if($itemCount > 2)
                             <p></p>
                             <table class='order-table'>
                                 <tbody>
                                     <tr>
 
                                         <td>
-                                            <br> <span class='thin'>And {{ $itemCount - 3 }} more...</span>
+                                            <br> <span class='thin'>And {{ $itemCount - 2 }} more...</span>
                                         </td>
                                     </tr>
 

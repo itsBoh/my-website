@@ -33,7 +33,7 @@ class HomeController extends Controller
                           LEFT JOIN product p ON p.prod_id = cp.prod_id
                           WHERE c.cust_id = ?', [$id]);
 
-            $wishlists = DB::select('SELECT p.PROD_NAME, p.PROD_PRICE, p.PROD_ID
+            $wishlists = DB::select('SELECT p.PROD_NAME as name, p.PROD_PRICE as price, p.PROD_ID as id
                         FROM wishlist_product wp
                         left join product p
                         on wp.PROD_ID = p.PROD_ID

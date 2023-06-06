@@ -443,6 +443,7 @@
 				<div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
 					<div class="m-l-25 m-r--38 m-lr-0-xl">
 						<form method="post" action="{{ route('cart.update') }}">
+							@csrf
 							<div class="wrap-table-shopping-cart">
 								<table class="table-shopping-cart">
 									<tr class="table_head">
