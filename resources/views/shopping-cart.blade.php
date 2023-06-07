@@ -473,6 +473,7 @@
 												@endphp
 												<img src="{{ $imgsrc }}" alt="IMG">
 											</div>
+											</input>
 										</td>
 										<input type="hidden" name="cartid[{{$key}}]" value="{{$result->CART_ID}}">
 										<input type="hidden" name="prodid[{{$key}}]" value="{{$result->PROD_ID}}">
