@@ -120,7 +120,7 @@ class CartController extends Controller
         $userid = session('customer')->CUST_ID;
         $prodid = $request->input('prodid');
         $wishlistid = $request->input('wishlistid');
-
+        
 
 
         // Redirect or return a response

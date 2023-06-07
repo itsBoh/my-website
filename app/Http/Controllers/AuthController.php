@@ -22,7 +22,7 @@ class AuthController extends Controller
             // Authentication passed
             $user = Customer::where('CUST_USERNAME', $credentials['CUST_USERNAME'])->first();
             Session::put('customer', $user);
-            return redirect()->route('/');
+            return redirect()->route('main');
         } else {
             // Authentication failed
             return redirect()->back()->with('error', 'Wrong username or password');
@@ -33,6 +33,6 @@ class AuthController extends Controller
     public function logout()
     {
         Session::forget('customer');
-        return redirect()->route('/');
+        return redirect('');
     }
 }

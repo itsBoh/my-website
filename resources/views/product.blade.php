@@ -717,7 +717,6 @@
 							}
 							}
 							@endphp
-
 							<img src="{{$imgsrc}}" alt="IMG-PRODUCT">
 
 

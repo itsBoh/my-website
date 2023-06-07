@@ -103,7 +103,7 @@
 						<!-- <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
 							<i class="zmdi zmdi-search"></i>
 						</div> -->
-
+						@if(session('customer'))
 						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="{{ count($results)}}">
 							<i class="zmdi zmdi-shopping-cart"></i>
 						</div>
@@ -111,6 +111,7 @@
 						<div class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-wishlist" data-notify="{{ count($wishlists) }}" id="wishlist-btn">
 							<i class="zmdi zmdi-favorite-outline"></i>
 						</div>
+						@endif
 					</div>
 				</nav>
 			</div>
@@ -212,7 +213,7 @@
 			</div>
 		</div> -->
 	</header>
-
+	@if(session('customer'))
 	<!-- Cart -->
 	<div class="wrap-header-cart js-panel-cart">
 		<div class="s-full js-hide-cart"></div>
@@ -423,7 +424,7 @@
 		</div>
 	</div>
 
-
+	@endif
 
 	<!-- breadcrumb -->
 	<div class="container">
@@ -463,9 +464,23 @@
 							<div class="slick3 gallery-lb">
 								<div class="item-slick3" data-thumb="images/product-detail-01.jpg">
 									<div class="wrap-pic-w pos-relative">
-										<img src="{{ asset('/images/product-detail-01.jpg') }}" alt="IMG-PRODUCT">
+										<!-- <img src="{{ asset('/images/product-detail-01.jpg') }}" alt="IMG-PRODUCT"> -->
+										@php
+										$filename = '/images/product/' . $products[0]->PROD_ID . ' ' . $products[0]->PROD_NAME . '/' . $products[0]->PROD_ID . '_1';
+										$imgsrc = asset($filename . '.png');
 
-										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{ url('images/product-detail-01.jpg') }}">
+										if (!file_exists(public_path($filename . '.png'))) {
+										if (!file_exists(public_path($filename . '.jpg'))) {
+										$imgsrc = asset('/images/unknown.jpg');
+										} else {
+										$imgsrc = asset($filename . '.jpg');
+										}
+										}
+										@endphp
+										<img src="{{ $imgsrc }}" alt="IMG-PRODUCT">
+
+
+										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{ $imgsrc }}">
 											<i class="fa fa-expand"></i>
 										</a>
 									</div>
@@ -473,9 +488,21 @@
 
 								<div class="item-slick3" data-thumb="images/product-detail-02.jpg">
 									<div class="wrap-pic-w pos-relative">
-										<img src="{{ asset('/images/product-detail-02.jpg') }}" alt="IMG-PRODUCT">
+										<!-- <img src="{{ asset('/images/product-detail-02.jpg') }}" alt="IMG-PRODUCT"> -->
+										@php
+										$filename = '/images/product/' . $products[0]->PROD_ID . ' ' . $products[0]->PROD_NAME . '/' . $products[0]->PROD_ID . '_2';
+										$imgsrc = asset($filename . '.png');
 
-										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{ url('images/product-detail-02.jpg') }}">
+										if (!file_exists(public_path($filename . '.png'))) {
+										if (!file_exists(public_path($filename . '.jpg'))) {
+										$imgsrc = asset('/images/unknown.jpg');
+										} else {
+										$imgsrc = asset($filename . '.jpg');
+										}
+										}
+										@endphp
+										<img src="{{ $imgsrc }}" alt="IMG-PRODUCT">
+										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{ $imgsrc }}">
 											<i class="fa fa-expand"></i>
 										</a>
 									</div>
@@ -483,8 +510,20 @@
 
 								<div class="item-slick3" data-thumb="images/product-detail-03.jpg">
 									<div class="wrap-pic-w pos-relative">
-										<img src="{{ asset('/images/product-detail-03.jpg') }}" alt="IMG-PRODUCT">
+										<!-- <img src="{{ asset('/images/product-detail-03.jpg') }}" alt="IMG-PRODUCT"> -->
+										@php
+										$filename = '/images/product/' . $products[0]->PROD_ID . ' ' . $products[0]->PROD_NAME . '/' . $products[0]->PROD_ID . '_3';
+										$imgsrc = asset($filename . '.png');
 
+										if (!file_exists(public_path($filename . '.png'))) {
+										if (!file_exists(public_path($filename . '.jpg'))) {
+										$imgsrc = asset('/images/unknown.jpg');
+										} else {
+										$imgsrc = asset($filename . '.jpg');
+										}
+										}
+										@endphp
+										<img src="{{ $imgsrc }}" alt="IMG-PRODUCT">
 										<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{ url('images/product-detail-03.jpg') }}">
 											<i class="fa fa-expand"></i>
 										</a>

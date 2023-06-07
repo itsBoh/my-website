@@ -88,8 +88,7 @@ Route::get('/checkouts', [CartController::class, 'checkout'])->name('cart-checko
 Route::post('/cart/ipdateWishlist', [CartController::class, 'updateWishlist'])->name('cart.updateWishlist');
 
 
-Route::get('/index', [HomeController::class, 'index'])->name('main');
-Route::get('/', [HomeController::class, 'index'])->name('main');
+Route::get('', [HomeController::class, 'index'])->name('main');
 
 Route::get('/product/detail', [ProductController::class, 'detail'])->name('product-detail');
 Route::match(['get', 'post'], '/product/detail', [ProductController::class, 'detail'])->name('product-detail');

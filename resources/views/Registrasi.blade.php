@@ -54,6 +54,7 @@
               </div>
               @endif
               @csrf
+              <input type="hidden" name="CUST_ID" value="1">
               <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">Username</span>
                 <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" name="CUST_USERNAME" required>
