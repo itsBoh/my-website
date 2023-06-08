@@ -54,6 +54,7 @@ Route::get('product', function () {
 Route::get('Registrasi', function () {
     return view('Registrasi');
 })->name('Registrasi');
+
 Route::get('shopping-cart', function () {
     return view('shopping-cart');
 });
