@@ -40,6 +40,12 @@ class WishlistController extends Controller
         $id = session('customer')->CUST_ID;
         $prodid = request('id');
         $wishlistid = request('wishid');
+        # check if product stock is > 0
+        $query = 'SELECT PROD_STOCK FROM product WHERE PROD_ID = ?';
+        $stock = DB::select($query, [$prodid]);
+        if($stock[0]->PROD_STOCK <= 0){
+            return redirect()->route('wishlists');
+        }
         #update cart_product
         $query = 'SELECT * FROM cart_product WHERE PROD_ID = ? AND CART_ID = (SELECT CART_ID FROM cart WHERE CUST_ID = ?)';
         $cart_product = DB::select($query, [$prodid, $id]);

@@ -53,7 +53,20 @@ class CartController extends Controller
 
                 $query = "DELETE FROM cart_product WHERE CART_ID = ? AND PROD_ID = ?";
                 DB::statement($query, [$cartId, $prodId]);
-            } else{
+            }
+            # update if stock > quantity
+            elseif ($quantity <= $request->input('stock')[$key]) {
+                $cartProductId = $request->input('cartid')[$key];
+                $cartId = $request->input('cartid')[$key];
+                $prodId = $request->input('prodid')[$key];
+
+                // Perform any necessary validation or checks here
+                // ...
+
+                $query = "UPDATE cart_product SET CART_QTY = ? WHERE CART_ID = ? AND PROD_ID = ?";
+                DB::statement($query, [$quantity, $cartId, $prodId]);
+            }
+            else{
                 $cartProductId = $request->input('cartid')[$key];
                 $cartId = $request->input('cartid')[$key];
                 $prodId = $request->input('prodid')[$key];
@@ -71,6 +84,20 @@ class CartController extends Controller
     }
     public function checkout(Request $request)
     {
+        // check if quantity in cart_product is more than stock
+        $custid = session('customer')->CUST_ID;
+        $cartId = DB::select('SELECT CART_ID FROM cart WHERE CUST_ID = ?', [$custid]);
+        $cartId = $cartId[0]->CART_ID;
+        $cartProducts = DB::select('SELECT * FROM cart_product WHERE CART_ID = ?', [$cartId]);
+        foreach ($cartProducts as $cartProduct) {
+            $prodId = $cartProduct->PROD_ID;
+            $prodStock = DB::select('SELECT PROD_STOCK FROM product WHERE PROD_ID = ?', [$prodId]);
+            $prodStock = $prodStock[0]->PROD_STOCK;
+            if ($cartProduct->CART_QTY > $prodStock) {
+                return redirect()->back()->with('error', 'Quantity in cart is more than stock');
+            }
+        }
+        
         // Perform the checkout process
         $id = session('customer')->CUST_ID;
         $address = $request->input('address');
