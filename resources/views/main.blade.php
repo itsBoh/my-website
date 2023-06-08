@@ -365,7 +365,7 @@
 										Rp {{ number_format($wish->price, 0, ',', '.') }}
 									</span>
 
-									<button type="submit" class="add-to-cart-btn" data-product-name="White Shirt Pleat" data-product-price="19.00">Add to Cart</button>
+									<!-- <button type="submit" class="add-to-cart-btn" data-product-name="White Shirt Pleat" data-product-price="19.00">Add to Cart</button> -->
 								</div>
 							</div>
 						</li>
@@ -410,9 +410,9 @@
 					</li> -->
 				</ul>
 				<div class="w-full">
-					<div class="header-wish-total w-full p-tb-40">
+					<!-- <div class="header-wish-total w-full p-tb-40">
 						5 Other Products in Wishlist
-					</div>
+					</div> -->
 
 					<div class="header-wish-buttons flex-w w-full">
 						<a href="{{ url('wishlist') }}" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">

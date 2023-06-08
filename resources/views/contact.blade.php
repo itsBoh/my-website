@@ -43,21 +43,26 @@
 					<div class="left-top-bar">
 						Gratis ongkir dengan minimum pembelanjaan Rp 500.000
 					</div>
-
-					<div class="right-top-bar flex-w h-full">
 					@if(session('customer'))
-						<a href="{{ url('account-profile') }}" class="flex-c-m trans-04 p-lr-25">
+					<div class="right-top-bar flex-w h-full">
+						<a href="{{ route('account-profile') }}" class="flex-c-m trans-04 p-lr-25">
 							My Account
 						</a>
 						<a href="{{ url('logout') }}" class="flex-c-m trans-04 p-lr-25">
 							Log Out
 						</a>
-						@else
-						<a href="{{ url('login') }}" class="flex-c-m trans-04 p-lr-25">
-							Log In
-						</a>
-						@endif
 					</div>
+					@else
+					<a href="{{ url('login') }}" class="flex-c-m trans-04 p-lr-25">
+						Log In
+					</a>
+					@endif
+					</div>
+					@else
+					<a href="{{ url('login') }}" class="flex-c-m trans-04 p-lr-25">
+						Log In
+					</a>
+					@endif
 				</div>
 			</div>
 
@@ -72,19 +77,19 @@
 					<!-- Menu desktop -->
 					<div class="menu-desktop">
 						<ul class="main-menu">
-							<li>
+							<li >
 								<a href="{{ url('') }}">Home</a>
 							</li>
 
 							<li>
-								<a href="{{ url('product') }}">Shop</a>
+								<a href="{{ url('products') }}">Shop</a>
 							</li>
 
 							<li>
 								<a href="{{ url('cart') }}">Cart</a>
 							</li>
 
-							<li>
+							<li >
 								<a href="{{ url('about') }}">About</a>
 							</li>
 
@@ -95,7 +100,7 @@
 					</div>
 
 					<!-- Icon header -->
-					<div class="wrap-icon-header flex-w flex-r-m">
+					<!-- <div class="wrap-icon-header flex-w flex-r-m">
 						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
 							<i class="zmdi zmdi-search"></i>
 						</div>
@@ -109,7 +114,7 @@
 							data-notify="0" id="wishlist-btn">
 							<i class="zmdi zmdi-favorite-outline"></i>
 						</div>
-					</div>
+					</div> -->
 				</nav>
 			</div>
 		</div>
@@ -122,21 +127,21 @@
 			</div>
 
 			<!-- Icon header -->
-			<div class="wrap-icon-header flex-w flex-r-m m-r-15">
+			<!-- <div class="wrap-icon-header flex-w flex-r-m m-r-15">
 				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 js-show-modal-search">
 					<i class="zmdi zmdi-search"></i>
 				</div>
 
-				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
-					data-notify="2">
+				 <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
+					>
 					<i class="zmdi zmdi-shopping-cart"></i>
 				</div>
 
 				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-wishlist"
-					data-notify="0">
+					>
 					<i class="zmdi zmdi-favorite-outline"></i>
-				</div>
-			</div>
+				</div> 
+			</div> -->
 
 			<!-- Button show menu -->
 			<div class="btn-show-menu-mobile hamburger hamburger--squeeze">
@@ -169,15 +174,15 @@
 			</ul>
 			<ul class="main-menu-m">
 				<li>
-					<a href="{{ url('home') }}">Home</a>
+					<a href="{{ url('') }}">Home</a>
 				</li>
 
 				<li>
-					<a href="{{ url('product') }}">Shop</a>
+					<a href="{{ url('products') }}">Shop</a>
 				</li>
 
 				<li>
-					<a href="{{ url('shoping-cart') }}">Cart</a>
+					<a href="{{ url('cart') }}">Cart</a>
 				</li>
 
 				<li>
@@ -408,20 +413,20 @@
 							Send Us A Message
 						</h4>
 
-						<div class="bor8 m-b-20 how-pos4-parent">
+						<!-- <div class="bor8 m-b-20 how-pos4-parent">
 							<input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="email"
 								placeholder="Your Email Address">
 							<img class="how-pos4 pointer-none" src="{{ asset('/images/icons/icon-email.png') }}" alt="ICON">
-						</div>
+						</div> -->
 
-						<div class="bor8 m-b-30">
+						<!-- <div class="bor8 m-b-30">
 							<textarea class="stext-111 cl2 plh3 size-120 p-lr-28 p-tb-25" name="msg"
 								placeholder="How Can We Help?"></textarea>
-						</div>
+						</div> -->
 
-						<button class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
+						<!-- <button class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
 							Submit
-						</button>
+						</button> -->
 					</form>
 				</div>
 

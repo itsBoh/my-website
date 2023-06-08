@@ -439,7 +439,8 @@
     </div>
 
     <!-- payment -->
-    <form action="home" method="post">
+    <form action="{{route('checkout.finish')}}" method="post">
+        @csrf
         <div>
             <div class='container1'>
                 <div class='window1'>
@@ -447,54 +448,55 @@
                         <div class='order-info-content'>
                             <h2>Order Summary</h2>
                             @php
-                            $itemCount = 0;
+                            $itemCount = count($results);
                             @endphp
                             @foreach($results as $key => $result)
+                            @if($key < 2) 
                             <div class='line'>
-                            </div>
-                            <table class='order-table'>
+                        </div>
+                        <table class='order-table'>
+                            <tr>
+                                <td>
+                                    <!-- <img class='full-width' src="images/item-cart-04.jpg" alt="IMG"> -->
+                                    @php
+                                    $filename = '/images/product/' . $result->PROD_ID . ' ' . $result->PROD_NAME . '/' . $result->PROD_ID . '_1';
+                                    $imgsrc = asset($filename . '.png');
+
+                                    if (!file_exists(public_path($filename . '.png'))) {
+                                    if (!file_exists(public_path($filename . '.jpg'))) {
+                                    $imgsrc = asset('/images/unknown.jpg');
+                                    } else {
+                                    $imgsrc = asset($filename . '.jpg');
+                                    }
+                                    }
+                                    @endphp
+                                    <img src="{{ $imgsrc }}" alt="IMG" class='full-width'>
+                                </td>
+                                <td>
+                                    <span class="thin">{{$result->PROD_NAME}}</span>
+                                    <input type="hidden" name="">
+                                </td>
+                                <td class="order-left">
+                                    <div class='price'>Rp {{$result->Price}}</div>
+                                </td>
+                            </tr>
+                        </table>
+                        @endif
+                        @endforeach
+                        <div class='line'>
+                        @if($itemCount > 2)
+                        <p></p>
+                        <table class='order-table'>
+                            <tbody>
                                 <tr>
                                     <td>
-                                        <!-- <img class='full-width' src="images/item-cart-04.jpg" alt="IMG"> -->
-                                        @php
-                                        $filename = '/images/product/' . $result->PROD_ID . ' ' . $result->PROD_NAME . '/' . $result->PROD_ID . '_1';
-                                        $imgsrc = asset($filename . '.png');
-
-                                        if (!file_exists(public_path($filename . '.png'))) {
-                                        if (!file_exists(public_path($filename . '.jpg'))) {
-                                        $imgsrc = asset('/images/unknown.jpg');
-                                        } else {
-                                        $imgsrc = asset($filename . '.jpg');
-                                        }
-                                        }
-                                        @endphp
-                                        <img src="{{ $imgsrc }}" alt="IMG" class='full-width'>
-                                    </td>
-                                    <td>
-                                        <span class="thin">{{$result->PROD_NAME}}</span>
-                                        <input type="hidden" name="">
-                                    </td>
-                                    <td class="order-left">
-                                        <div class='price'>Rp {{$result->Price}}</div>
+                                        <span class='thin'>And {{ $itemCount - 2 }} more...</span>
                                     </td>
                                 </tr>
-                            </table>
-                            @endforeach
-                            @if($itemCount > 2)
-                            <p></p>
-                            <table class='order-table'>
-                                <tbody>
-                                    <tr>
-
-                                        <td>
-                                            <br> <span class='thin'>And {{ $itemCount - 2 }} more...</span>
-                                        </td>
-                                    </tr>
-
-                                </tbody>
-                            </table>
-                            @endif
-                            <!-- <table class='order-table'>
+                            </tbody>
+                        </table>
+                        @endif
+                        <!-- <table class='order-table'>
                         <tbody>
                             <tr>
                                 <td>
@@ -511,66 +513,66 @@
                             </tr>
                         </tbody>
                         </table> -->
-                            <div class='line'>
-                                <br><br>
-                                <span style='float:right; text-align:right;'>
-                                    <div class='thin dense'>Ship to</div>
-                                    {{$address}}
-                                </span>
-                            </div>
-                            <div class='total'>
-                                <span style='float:right; text-align:right;'>
-                                    <div class='thin dense'>Total</div>
-                                    Rp {{number_format($result2[0]->Price, 0, ',', '.')}}
-                                </span>
+                        
+                            
+                            <span style='float:right; text-align:right;'>
+                                <div class='thin dense'>Ship to</div>
+                                {{$address}}
+                            </span>
+                        </div>
+                        <div class='total'>
+                            <span style='float:right; text-align:right;'>
+                                <div class='thin dense'>Total</div>
+                                Rp {{number_format($result2[0]->Price, 0, ',', '.')}}
+                            </span>
 
-                            </div>
                         </div>
                     </div>
-                    <form action="{{route('checkout.finish')}}">
-                        @csrf
-                        <input type="hidden" name="total" value="{{$result2[0]->Price}}">
-                        <input type="hidden" name="address" value="{{$address}}">
-                        <div class='credit-info'>
-                            <div class='credit-info-content'>
-                                <table class='half-input-table'>
-                                    <tr>
-                                        <td>Please select your card: </td>
-                                        <td>
-                                            <div class='dropdown' id='card-dropdown'>
-                                                <div class='dropdown-btn' id='current-card' name="">Visa</div>
-                                                <div class='dropdown-select'>
-                                                    <ul>
-                                                        <li>Master Card</li>
-                                                        <li>American Express</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </table>
-                                <img src='https://dl.dropboxusercontent.com/s/ubamyu6mzov5c80/visa_logo%20%281%29.png' height='80' class='credit-card-image' id='credit-card-image'></img>
-                                Card Number
-                                <input class='input-field' required></input>
-                                Card Holder
-                                <input class='input-field' required></input>
-                                <table class='half-input-table'>
-                                    <tr>
-                                        <td> Expires
-                                            <input class='input-field' required></input>
-                                        </td>
-                                        <td>CVC
-                                            <input class='input-field' required></input>
-                                        </td>
-                                    </tr>
-                                </table>
-                                <input type="hidden" name="cartid" value="{{$results[0]->CART_ID}}">
-                                <button class='pay-btn' type="submit" data-bs-toggle="modal" data-bs-target="#COModal">Checkout</button>
-                            </div>
-                        </div>
-                    </form>
                 </div>
+                    <input type="hidden" name="total" value="{{$result2[0]->Price}}">
+                    <input type="hidden" name="address" value="{{$address}}">
+                    <div class='credit-info'>
+                        <div class='credit-info-content'>
+                            <table class='half-input-table'>
+                                <tr>
+                                    <td>Please select your card: </td>
+                                    <td>
+                                        <div class='dropdown' id='card-dropdown'>
+                                            <div class='dropdown-btn' id='current-card' name="">Visa</div>
+                                            <div class='dropdown-select'>
+                                                <ul>
+                                                    <li>Master Card</li>
+                                                    <li>American Express</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <img src='https://dl.dropboxusercontent.com/s/ubamyu6mzov5c80/visa_logo%20%281%29.png' height='80' class='credit-card-image' id='credit-card-image'></img>
+                            Card Number
+                            <input class='input-field' ></input>
+                            Card Holder
+                            <input class='input-field' ></input>
+                            <table class='half-input-table'>
+                                <tr>
+                                    <td> Expires
+                                        <input class='input-field' ></input>
+                                    </td>
+                                    <td>CVC
+                                        <input class='input-field' ></input>
+                                    </td>
+                                </tr>
+                            </table>
+                            <input type="hidden" name="address" value="{{$address}}">
+                            <input type="hidden" name="total" value="{{$result2[0]->Price}}">
+                            <input type="hidden" name="">
+                            <input type="hidden" name="cartid" value="{{$results[0]->CART_ID}}">
+                            <button class='pay-btn' type="submit" data-bs-toggle="modal" data-bs-target="#COModal">Checkout</button>
+                        </div>
+                    </div>
             </div>
+        </div>
         </div>
         <!-- Modal -->
         <!-- <div class="modal fade" id="COModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -588,8 +590,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </form> -->
+        </div> -->
+    </form>
 
 
         <!-- end payment -->

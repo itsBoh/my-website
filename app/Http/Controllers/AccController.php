@@ -17,6 +17,8 @@ class AccController extends Controller
                       LEFT JOIN cart c ON c.cart_id = cp.cart_id
                       LEFT JOIN product p ON p.prod_id = cp.prod_id
                       WHERE c.cust_id = ?', [$id]);
+        
+        
 
         $wishlists = DB::select('SELECT p.PROD_NAME as `name`, p.PROD_PRICE as `price`, p.PROD_ID as `id`, w.WISHLIST_ID as `wishlist_id`
                         FROM wishlist_product wp

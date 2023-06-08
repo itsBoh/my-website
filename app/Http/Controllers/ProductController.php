@@ -123,7 +123,6 @@ class ProductController extends Controller
         #add to cart product based on product id
         $prodid = $request->input('prodid');
         $custid = session('customer')->CUST_ID;
-        $wishlist_id = $request->input('wishlist_id');
         #check if product is already in wishlist
         $check = DB::select('SELECT * FROM wishlist_product WHERE PROD_ID = ? AND WISHLIST_ID = ?', [$prodid, $custid]);
         if ($check) {
@@ -133,7 +132,7 @@ class ProductController extends Controller
             # get wishlist id based on customer id
             $wishlistid = DB::select('SELECT WISHLIST_ID FROM wishlist WHERE cust_id = ?', [$custid]);
             # add product to wishlist_product
-            $query = DB::insert('INSERT INTO wishlist_product (WISHLIST_ID, PROD_ID) VALUES (?, ?)', [$wishlistid[0]->WISHLIST_ID, $prodid]);
+            $query = DB::insert('INSERT INTO wishlist_product (WISHLIST_ID, PROD_ID) VALUES ((SELECT WISHLIST_ID FROM wishlist WHERE CUST_ID = ?) , ?)', [$custid, $prodid]);
         }
         
         #display success message
