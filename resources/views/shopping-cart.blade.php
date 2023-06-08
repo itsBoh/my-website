@@ -434,7 +434,12 @@
 			</span>
 		</div>
 	</div>
-
+								<!-- display error -->
+    @if(session('error'))
+	<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		{{ session('error') }}
+	</div>
+	@endif
 
 	<!-- Shoping Cart -->
 	<div class="bg0 p-t-75 p-b-85">
@@ -554,7 +559,7 @@
 									</div>
 								</div>
 							</div>
-
+						    
 							<div class="flex-w flex-t p-t-27 p-b-33">
 								<div class="size-208">
 									<span class="mtext-101 cl2">
