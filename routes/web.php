@@ -53,7 +53,7 @@ Route::get('product', function () {
 });
 Route::get('Registrasi', function () {
     return view('Registrasi');
-});
+})->name('Registrasi');
 Route::get('shopping-cart', function () {
     return view('shopping-cart');
 });
@@ -114,3 +114,6 @@ Route::post('checkout/payment', [checkoutController::class, 'payment'])->name('c
 Route::post('/checkout/pay', [CartController::class, 'checkout'])->name('checkout.pay')->middleware('auth');
 
 Route::post('/checkout/finish', [checkoutController::class, 'finish'])->name('checkout.finish')->middleware('auth');
+
+Route::get('/auth/google',  [AuthController::class, 'redirectToGoogle'])->name('Google');
+Route::get('/auth/google/callback',  [AuthController::class, 'handleGoogleCallback'])->name('Google');

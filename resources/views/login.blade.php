@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="{{ asset('/css/Login.css') }}" media="screen">
   <script class="u-script" type="text/javascript" src="{{ asset('/jquery-1.9.1.min.js') }}" defer=""></script>
   <script class="u-script" type="text/javascript" src="{{ asset('/initial.js') }}" defer=""></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
   <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
   <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
@@ -65,6 +66,11 @@
               <div class="u-form-group u-form-submit u-block-22fd-58">
                 <!-- <a class="u-active-palette-1-light-2 u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-font u-font-montserrat u-hover-palette-1-light-1 u-palette-1-dark-2 u-radius-50 u-text-hover-palette-1-light-3 u-block-22fd-59" data-animation-name="" data-animation-duration="0" data-animation-delay="0" data-animation-direction="">Login</a> -->
                 <input type="submit" value="Login" class="u-active-palette-1-light-2 u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-font u-font-montserrat u-hover-palette-1-light-1 u-palette-1-dark-2 u-radius-50 u-text-hover-palette-1-light-3 u-block-22fd-59" data-animation-name="" data-animation-duration="0" data-animation-delay="0" data-animation-direction="">
+                <!-- Add the button markup to your login page -->
+                <a href="{{ url('/auth/google') }}" class="u-active-palette-1-light-2 u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-font u-font-montserrat u-hover-palette-1-light-1 u-palette-1-dark-2 u-radius-50 u-text-hover-palette-1-light-3 u-block-22fd-59" data-animation-name="" data-animation-duration="0" data-animation-delay="0" data-animation-direction="">
+                  <i class="fab fa-google"></i> Login with Google
+                </a>
+
               </div>
               <input type="hidden" value="" name="recaptchaResponse">
               <input type="hidden" id="siteId" name="siteId" value="4851710">
