@@ -9,6 +9,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\checkoutController;
 use App\Http\Controllers\displayCartProducts;
+use App\Http\Controllers\formMessage;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Trans;
 use App\Http\Controllers\WishlistController;
@@ -121,3 +122,6 @@ Route::post('/checkout/finish', [Trans::class, 'check'])->name('checkout.finish'
 
 Route::get('/auth/google',  [AuthController::class, 'redirectToGoogle'])->name('Google');
 Route::get('/auth/google/callback',  [AuthController::class, 'handleGoogleCallback'])->name('Google');
+
+
+Route::post('/ehe', [formMessage::class, 'formMessage'])->name('ehe');

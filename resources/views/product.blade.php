@@ -76,11 +76,11 @@
 					<!-- Menu desktop -->
 					<div class="menu-desktop">
 						<ul class="main-menu">
-							<li>
+							<li class="active-menu">
 								<a href="{{ url('') }}">Home</a>
 							</li>
 
-							<li class="active-menu">
+							<li>
 								<a href="{{ url('products') }}">Shop</a>
 							</li>
 
@@ -213,8 +213,6 @@
 			</div>
 		</div> -->
 	</header>
-
-
 	@if(session('customer'))
 	<!-- Cart -->
 	<div class="wrap-header-cart js-panel-cart">
@@ -305,12 +303,8 @@
 					</div>
 
 					<div class="header-cart-buttons flex-w w-full">
-						<a href="{{ url('shoping-cart') }}" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+						<a href="{{ url('cart') }}" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
 							View Cart
-						</a>
-
-						<a href="{{ url('shoping-cart') }}" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
-							Check Out
 						</a>
 					</div>
 				</div>
@@ -336,6 +330,7 @@
 				<ul class="header-wishlist-wrapitem w-full">
 					@foreach($wishlists as $wish)
 					<form action="{{ route('product-wishlist') }}" method="post">
+						@csrf
 						<li class="header-wishlist-item flex-w flex-t m-b-12">
 							<div class="header-wishlist-item-img">
 								<!-- <img src="{{ asset('/images/item-cart-01.jpg') }}" alt="IMG"> -->
@@ -365,7 +360,7 @@
 										Rp {{ number_format($wish->price, 0, ',', '.') }}
 									</span>
 
-									<!-- <button type="submit" class="add-to-cart-btn" data-product-name="White Shirt Pleat" data-product-price="19.00">Add to Cart</button> -->
+
 								</div>
 							</div>
 						</li>
@@ -415,7 +410,7 @@
 					</div> -->
 
 					<div class="header-wish-buttons flex-w w-full">
-						<a href="{{ url('wishlist') }}" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+						<a href="{{ url('wishlists') }}" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
 							View Wishlist
 						</a>
 
@@ -740,9 +735,9 @@
 										{{$product->PROD_NAME}}
 									</button>
 									<button type="submit">
-									<span class="stext-105 cl3">
-										Rp {{number_format($product->PROD_PRICE,0,",",".")}}
-									</span>
+										<span class="stext-105 cl3">
+											Rp {{number_format($product->PROD_PRICE,0,",",".")}}
+										</span>
 									</button>
 								</div>
 

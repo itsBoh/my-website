@@ -44,7 +44,7 @@
 					</div>
 					@if(session('customer'))
 					<div class="right-top-bar flex-w h-full">
-					<a href="{{ route('account-profile') }}" class="flex-c-m trans-04 p-lr-25">
+						<a href="{{ route('account-profile') }}" class="flex-c-m trans-04 p-lr-25">
 							My Account
 						</a>
 						<a href="{{ url('logout') }}" class="flex-c-m trans-04 p-lr-25">
@@ -506,10 +506,11 @@
 
 									</div>
 								</div>
-
+								@if(count($results) > 0)
 								<button type="submit" class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
 									Update Cart
 								</button>
+								@endif
 							</div>
 						</form>
 					</div>
@@ -567,7 +568,13 @@
 									</span>
 								</div>
 							</div>
-							<button type="submit" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+							<?php
+							$isDisabled = (count($results) <= 0); // Determine if button should be disabled
+							?>
+
+							<button type="submit" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer" <?php if ($isDisabled) {
+																																			echo 'disabled';
+																																		} ?>>
 								Proceed to Checkout
 							</button>
 						</form>
