@@ -6,6 +6,8 @@ use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Laravel\Socialite\Facades\Socialite;
+use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -27,12 +29,41 @@ class AuthController extends Controller
             // Authentication failed
             return redirect()->back()->with('error', 'Wrong username or password');
         }
-        
+
     }
 
     public function logout()
     {
         Session::forget('customer');
         return redirect('');
+    }
+
+    // Redirect the user to the Google authentication page
+    public function redirectToGoogle()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    // Handle the Google callback after authentication
+    public function handleGoogleCallback()
+    {
+        $googleUser  = Socialite::driver('google')->user();
+        // Check if the user already exists
+        $existingUser = Customer::where('CUST_EMAIL', $googleUser ->email)->first();
+
+        if ($existingUser) {
+            $user = Customer::where('CUST_EMAIL', $googleUser ->email)->first();
+            Session::put('customer', $user);
+            return redirect()->route('main');
+        } else {
+            // Create a new user
+            return redirect()->route('Registrasi', [
+                'name' => $googleUser->name,
+                'email' => $googleUser->email,
+            ]);
+        }
+
+        // Redirect to the desired page after login
+        return redirect('/main');
     }
 }
