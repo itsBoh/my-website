@@ -19,33 +19,33 @@ class Trans extends Controller
         $paymentStatus = "U";
         $statusDel = 0;
         
-        $name = DB::select('SELECT CUST_NAME FROM customer WHERE CUST_ID = ?', [$id]);
+        $name = DB::select('SELECT CUST_NAME FROM CUSTOMER WHERE CUST_ID = ?', [$id]);
 
         DB::insert('INSERT INTO `TRANSACTION`(TRANS_ID, CUST_ID, TRANS_DATE, TRANS_TOTAL_PRICE, SHIPPING_ADDRESS, PAYMENT_METHOD, PAYMENT_STATUS, STATUS_DEL)
-                      VALUES (1, ?,?,?,?,?,?,0)', [$id, $transDate, $transTotalPrice, $shippingAddress, 'card', 'U']);
+                      VALUES (1, ?,?,?,?,?,?,0)', [$id, $transDate, $transTotalPrice, $shippingAddress, 'CARD', 'U']);
         
 
         // Retrieve the cart products for the customer
-        $cartProducts = DB::table('cart_product')
-            ->join('cart', 'cart_product.CART_ID', '=', 'cart.CART_ID')
-            ->where('cart.CUST_ID', $id)
-            ->select('cart_product.PROD_ID', 'cart_product.CART_QTY')
+        $cartProducts = DB::table('CART_PRODUCT')
+            ->join('CART', 'CART_PRODUCT.CART_ID', '=', 'CART.CART_ID')
+            ->where('CART.CUST_ID', $id)
+            ->select('CART_PRODUCT.PROD_ID', 'CART_PRODUCT.CART_QTY')
             ->get();
 
         // Generate the transaction ID
-        $transId = DB::select('SELECT TRANS_ID FROM `TRANSACTION` WHERE CUST_ID = ? ORDER BY 1 DESC', [$id]);
+        $transId = DB::select('SELECT TRANS_ID FROM TRANSACTION WHERE CUST_ID = ? ORDER BY 1 DESC', [$id]);
         $transId = $transId[0]->TRANS_ID;
         // Move the cart products to transaction products
         foreach ($cartProducts as $cartProduct) {
             $prodId = $cartProduct->PROD_ID;
             $transQty = $cartProduct->CART_QTY;
-            $transPrice = DB::table('product')
+            $transPrice = DB::table('PRODUCT')
                 ->where('PROD_ID', $prodId)
                 ->value('PROD_PRICE');
             $transPrice = $transPrice * $transQty;
         
             // Get the current stock quantity of the product
-            $currentStock = DB::table('product')
+            $currentStock = DB::table('PRODUCT')
                 ->where('PROD_ID', $prodId)
                 ->value('PROD_STOCK');
         
@@ -53,7 +53,7 @@ class Trans extends Controller
             $newStock = $currentStock - $transQty;
         
             // Update the product quantity in the product table
-            DB::table('product')
+            DB::table('PRODUCT')
                 ->where('PROD_ID', $prodId)
                 ->update(['PROD_STOCK' => $newStock]);
         
