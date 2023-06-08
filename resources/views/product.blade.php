@@ -743,7 +743,7 @@
 
 
 							<div class="block2-txt-child2 flex-r p-t-3">
-								@if(session('customer'))
+								@if(session('customer') && count($wishlists) > 0)
 								<form action="{{ route('product.addToWishlist')}}" method="post">
 									@csrf
 									<input type="hidden" name="prodid" value="{{$product->PROD_ID}}">
