@@ -17,8 +17,6 @@ class AccController extends Controller
                       LEFT JOIN cart c ON c.cart_id = cp.cart_id
                       LEFT JOIN product p ON p.prod_id = cp.prod_id
                       WHERE c.cust_id = ?', [$id]);
-        
-        
 
         $wishlists = DB::select('SELECT p.PROD_NAME as `name`, p.PROD_PRICE as `price`, p.PROD_ID as `id`, w.WISHLIST_ID as `wishlist_id`
                         FROM wishlist_product wp
@@ -62,7 +60,7 @@ class AccController extends Controller
     }
     public function showTransaction()
     {
-        
+
         $id = session('customer')->CUST_ID;
         $customer = DB::select('SELECT * FROM customer WHERE CUST_ID = ?', [$id]);
         $query = "select p.PROD_NAME as name, p.PROD_ID as id, tp.TRANS_QTY as quantity, tp.TRANS_PRICE as price, t.payment_status as 'pay', date_format(t.TRANS_DATE, '%d-%M-%Y') as `date`

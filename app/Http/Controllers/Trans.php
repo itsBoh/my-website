@@ -39,6 +39,10 @@ class Trans extends Controller
         foreach ($cartProducts as $cartProduct) {
             $prodId = $cartProduct->PROD_ID;
             $transQty = $cartProduct->CART_QTY;
+            $transPrice = DB::table('product')
+                ->where('PROD_ID', $prodId)
+                ->value('PROD_PRICE');
+            $transPrice = $transPrice * $transQty;
         
             // Get the current stock quantity of the product
             $currentStock = DB::table('product')
@@ -58,7 +62,7 @@ class Trans extends Controller
                 'PROD_ID' => $prodId,
                 'TRANS_ID' => $transId,
                 'TRANS_QTY' => $transQty,
-                'TRANS_PRICE' => 0, // Set the initial price as 0, update it if necessary
+                'TRANS_PRICE' => $transPrice,
                 'STATUS_DEL' => 0, // Assuming 0 represents not deleted
             ]);
         }

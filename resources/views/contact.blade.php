@@ -57,50 +57,45 @@
 						Log In
 					</a>
 					@endif
-					</div>
-					@else
-					<a href="{{ url('login') }}" class="flex-c-m trans-04 p-lr-25">
-						Log In
-					</a>
-					@endif
 				</div>
 			</div>
+		</div>
 
-			<div class="wrap-menu-desktop how-shadow1">
-				<nav class="limiter-menu-desktop container">
+		<div class="wrap-menu-desktop how-shadow1">
+			<nav class="limiter-menu-desktop container">
 
-					<!-- Logo desktop -->
-					<a href="{{ url('') }}" class="logo">
-						<img src="{{ asset('/images/icons/logo-01.png') }}" alt="IMG-LOGO">
-					</a>
+				<!-- Logo desktop -->
+				<a href="{{ url('') }}" class="logo">
+					<img src="{{ asset('/images/icons/logo-01.png') }}" alt="IMG-LOGO">
+				</a>
 
-					<!-- Menu desktop -->
-					<div class="menu-desktop">
-						<ul class="main-menu">
-							<li >
-								<a href="{{ url('') }}">Home</a>
-							</li>
+				<!-- Menu desktop -->
+				<div class="menu-desktop">
+					<ul class="main-menu">
+						<li>
+							<a href="{{ url('') }}">Home</a>
+						</li>
 
-							<li>
-								<a href="{{ url('products') }}">Shop</a>
-							</li>
+						<li>
+							<a href="{{ url('products') }}">Shop</a>
+						</li>
 
-							<li>
-								<a href="{{ url('cart') }}">Cart</a>
-							</li>
+						<li>
+							<a href="{{ url('cart') }}">Cart</a>
+						</li>
 
-							<li >
-								<a href="{{ url('about') }}">About</a>
-							</li>
+						<li>
+							<a href="{{ url('about') }}">About</a>
+						</li>
 
-							<li class="active-menu">
-								<a href="{{ url('contact') }}">Contact</a>
-							</li>
-						</ul>
-					</div>
+						<li class="active-menu">
+							<a href="{{ url('contact') }}">Contact</a>
+						</li>
+					</ul>
+				</div>
 
-					<!-- Icon header -->
-					<!-- <div class="wrap-icon-header flex-w flex-r-m">
+				<!-- Icon header -->
+				<!-- <div class="wrap-icon-header flex-w flex-r-m">
 						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
 							<i class="zmdi zmdi-search"></i>
 						</div>
@@ -115,8 +110,8 @@
 							<i class="zmdi zmdi-favorite-outline"></i>
 						</div>
 					</div> -->
-				</nav>
-			</div>
+			</nav>
+		</div>
 		</div>
 
 		<!-- Header Mobile -->
@@ -284,13 +279,11 @@
 					</div>
 
 					<div class="header-cart-buttons flex-w w-full">
-						<a href="{{ url('shoping-cart') }}"
-							class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+						<a href="{{ url('shoping-cart') }}" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
 							View Cart
 						</a>
 
-						<a href="{{ url('shoping-cart') }}"
-							class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+						<a href="{{ url('shoping-cart') }}" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
 							Check Out
 						</a>
 					</div>
@@ -329,8 +322,7 @@
 									Rp 190.000
 								</span>
 
-								<button class="add-to-cart-btn" data-product-name="White Shirt Pleat"
-									data-product-price="19.00">Add to Cart</button>
+								<button class="add-to-cart-btn" data-product-name="White Shirt Pleat" data-product-price="19.00">Add to Cart</button>
 							</div>
 						</div>
 					</li>
@@ -349,8 +341,7 @@
 									Rp 390.000
 								</span>
 
-								<button class="add-to-cart-btn" data-product-name="Converse All Star"
-									data-product-price="39.00">Add to Cart</button>
+								<button class="add-to-cart-btn" data-product-name="Converse All Star" data-product-price="39.00">Add to Cart</button>
 							</div>
 						</div>
 					</li>
@@ -369,8 +360,7 @@
 									Rp 170.000
 								</span>
 
-								<button class="add-to-cart-btn" data-product-name="Nixon Porter Leather"
-									data-product-price="17.00">Add to Cart</button>
+								<button class="add-to-cart-btn" data-product-name="Nixon Porter Leather" data-product-price="17.00">Add to Cart</button>
 							</div>
 						</div>
 					</li>
@@ -381,8 +371,7 @@
 					</div>
 
 					<div class="header-wish-buttons flex-w w-full">
-						<a href="{{ url('wishlist') }}"
-							class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+						<a href="{{ url('wishlist') }}" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
 							View Wishlist
 						</a>
 
@@ -408,25 +397,31 @@
 		<div class="container">
 			<div class="flex-w flex-tr">
 				<div class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
-					<form>
+					<form action="{{route('ehe')}}" method="post">
+						@csrf
+						@if(session('success'))
+						<div class="alert alert-success">
+							{{ session('success') }}
+						</div>
+						@endif
 						<h4 class="mtext-105 cl2 txt-center p-b-30">
 							Send Us A Message
 						</h4>
 
-						<!-- <div class="bor8 m-b-20 how-pos4-parent">
+						<div class="bor8 m-b-20 how-pos4-parent">
 							<input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="email"
 								placeholder="Your Email Address">
 							<img class="how-pos4 pointer-none" src="{{ asset('/images/icons/icon-email.png') }}" alt="ICON">
-						</div> -->
+						</div>
 
-						<!-- <div class="bor8 m-b-30">
+						<div class="bor8 m-b-30">
 							<textarea class="stext-111 cl2 plh3 size-120 p-lr-28 p-tb-25" name="msg"
 								placeholder="How Can We Help?"></textarea>
-						</div> -->
+						</div>
 
-						<!-- <button class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
+						<button class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
 							Submit
-						</button> -->
+						</button>
 					</form>
 				</div>
 
@@ -487,8 +482,7 @@
 
 	<!-- Map -->
 	<div class="map">
-		<div class="size-303" id="google_map" data-map-x="-7.285565908283544" data-map-y="112.6316056197334"
-			data-pin="images/icons/pin.png" data-scrollwhell="0" data-draggable="1" data-zoom="11"></div>
+		<div class="size-303" id="google_map" data-map-x="-7.285565908283544" data-map-y="112.6316056197334" data-pin="images/icons/pin.png" data-scrollwhell="0" data-draggable="1" data-zoom="11"></div>
 	</div>
 
 
@@ -498,7 +492,7 @@
 	<footer class="bg3 p-t-75 p-b-32">
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-6 col-lg-3 p-b-50">
+				<!-- <div class="col-sm-6 col-lg-3 p-b-50">
 					<h4 class="stext-301 cl0 p-b-30">
 						Categories
 					</h4>
@@ -552,7 +546,7 @@
 							</a>
 						</li>
 					</ul>
-				</div>
+				</div> -->
 
 				<!-- <div class="col-sm-6 col-lg-3 p-b-50">
 					<h4 class="stext-301 cl0 p-b-30">
@@ -611,15 +605,14 @@
 					</div>
 				</div>
 
-				<div class="col-sm-6 col-lg-3 p-b-50">
+				<!-- <div class="col-sm-6 col-lg-3 p-b-50">
 					<h4 class="stext-301 cl0 p-b-30">
 						Newsletter
 					</h4>
 
 					<form>
 						<div class="wrap-input1 w-full p-b-4">
-							<input class="input1 bg-none plh1 stext-107 cl7" type="text" name="email"
-								placeholder="email@example.com">
+							<input class="input1 bg-none plh1 stext-107 cl7" type="text" name="email" placeholder="email@example.com">
 							<div class="focus-input1 trans-04"></div>
 						</div>
 
@@ -629,7 +622,7 @@
 							</button>
 						</div>
 					</form>
-				</div>
+				</div> -->
 			</div>
 
 			<div class="p-t-40">
@@ -646,7 +639,9 @@
 
 				<p class="stext-107 cl6 txt-center">
 					Copyright &copy;
-					<script>document.write(new Date().getFullYear());</script> All rights reserved | Made by
+					<script>
+						document.write(new Date().getFullYear());
+					</script> All rights reserved | Made by
 					MonoMode</a>
 
 				</p>
@@ -672,7 +667,7 @@
 	<!--===============================================================================================-->
 	<script src="{{ asset('/vendor/select2/select2.min.js') }}"></script>
 	<script>
-		$(".js-select2").each(function () {
+		$(".js-select2").each(function() {
 			$(this).select2({
 				minimumResultsForSearch: 20,
 				dropdownParent: $(this).next('.dropDownSelect2')
@@ -684,7 +679,7 @@
 	<!--===============================================================================================-->
 	<script src="{{ asset('/vendor/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
 	<script>
-		$('.js-pscroll').each(function () {
+		$('.js-pscroll').each(function() {
 			$(this).css('position', 'relative');
 			$(this).css('overflow', 'hidden');
 			var ps = new PerfectScrollbar(this, {
@@ -693,7 +688,7 @@
 				wheelPropagation: false,
 			});
 
-			$(window).on('resize', function () {
+			$(window).on('resize', function() {
 				ps.update();
 			})
 		});

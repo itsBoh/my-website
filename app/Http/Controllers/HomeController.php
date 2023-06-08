@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\displayCartProducts;
 use Illuminate\Support\Facades\DB;
+use App\Models\Product;
 
 class HomeController extends Controller
 {
@@ -25,6 +26,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $products = Product::inRandomOrder()->limit(8)->get();
+
         if (session('customer')) {
             $id = session('customer')->CUST_ID;
             $results = DB::select('SELECT p.PROD_NAME, cp.CART_QTY, p.PROD_PRICE, (cp.CART_QTY * p.PROD_PRICE) AS Price, cp.CART_ID, p.PROD_ID
@@ -47,9 +50,9 @@ class HomeController extends Controller
                         LEFT JOIN product p ON p.prod_id = cp.prod_id
                         WHERE c.cust_id = ?', [$id]);
 
-            return view('main', compact('results', 'wishlists', 'total'));
+            return view('main', compact('results', 'wishlists', 'total', 'products'));
         } else {
-            return view('main');
+            return view('main', compact('products'));
         }
     }
 }

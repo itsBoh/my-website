@@ -32,7 +32,7 @@
 
 <body class="u-body u-hide-header u-xl-mode" data-style="blank" data-posts="">
   @if(session('error'))
-    <div>{{ session('error') }}</div>
+  <div>{{ session('error') }}</div>
   @endif
   <section class="u-align-center u-clearfix u-block-22fd-65" custom-posts-hash="T" data-section-properties="{&quot;margin&quot;:&quot;both&quot;,&quot;stretch&quot;:true}" data-id="22fd" data-style="login-form-1" id="sec-07dc">
 
@@ -48,15 +48,19 @@
           <div class="u-form u-login-control u-block-22fd-49" data-animation-name="" data-animation-duration="0" data-animation-delay="0" data-animation-direction="">
             <form method="POST" action="{{ route('login-user') }}" class="u-clearfix u-form-custom-backend u-form-spacing-20 u-form-vertical u-inner-form" source="custom" name="formLogin" style="padding: 30px;" data-services="" redirect="true">
               @csrf
+              @if(session('error'))
+              <div class="alert alert-danger">{{ session('error') }}</div>
+              @endif
+              
               <div class="u-form-group u-form-name u-block-22fd-50">
-                <label for="username" class="u-custom-font u-font-montserrat u-label u-block-22fd-51">Username
+                <label for="username" class="u-custom-font u-font-montserrat u-label u-block-22fd-51" autocomplete="username">Username
                   *</label>
                 <input type="text" placeholder="Enter your Username" id="username" name="CUST_USERNAME" class="u-input u-input-rectangle u-block-22fd-52" required spellcheck="false">
               </div>
               <div class="u-form-group u-block-22fd-53">
                 <label for="password" class="u-custom-font u-font-montserrat u-label u-block-22fd-54">Password
                   *</label>
-                <input type="password" placeholder="Enter your Password" id="password" name="CUST_PASSWORD" class="u-input u-input-rectangle u-block-22fd-55" required>
+                <input type="password" placeholder="Enter your Password" id="password" name="CUST_PASSWORD" class="u-input u-input-rectangle u-block-22fd-55" required required autocomplete="current-password">
               </div>
               <div class="u-form-checkbox u-form-group u-block-22fd-56">
                 <input type="checkbox" id="remember" name="remember" value="On" class="u-field-input">

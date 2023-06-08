@@ -34,6 +34,7 @@
 
 <body class="animsition">
 
+	<!-- Header -->
 	<header class="header-v4">
 		<!-- Header desktop -->
 		<div class="container-menu-desktop">
@@ -45,7 +46,7 @@
 					</div>
 					@if(session('customer'))
 					<div class="right-top-bar flex-w h-full">
-						<a href="{{ url('account-profile') }}" class="flex-c-m trans-04 p-lr-25">
+						<a href="{{ route('account-profile') }}" class="flex-c-m trans-04 p-lr-25">
 							My Account
 						</a>
 						<a href="{{ url('logout') }}" class="flex-c-m trans-04 p-lr-25">
@@ -71,11 +72,11 @@
 					<!-- Menu desktop -->
 					<div class="menu-desktop">
 						<ul class="main-menu">
-							<li>
+							<li class="active-menu">
 								<a href="{{ url('') }}">Home</a>
 							</li>
 
-							<li class="active-menu">
+							<li>
 								<a href="{{ url('products') }}">Shop</a>
 							</li>
 
@@ -98,7 +99,7 @@
 						<!-- <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
 							<i class="zmdi zmdi-search"></i>
 						</div> -->
-
+						@if(session('customer'))
 						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="{{ count($results)}}">
 							<i class="zmdi zmdi-shopping-cart"></i>
 						</div>
@@ -106,6 +107,7 @@
 						<div class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-wishlist" data-notify="{{ count($wishlists) }}" id="wishlist-btn">
 							<i class="zmdi zmdi-favorite-outline"></i>
 						</div>
+						@endif
 					</div>
 				</nav>
 			</div>
@@ -207,7 +209,7 @@
 			</div>
 		</div> -->
 	</header>
-
+	@if(session('customer'))
 	<!-- Cart -->
 	<div class="wrap-header-cart js-panel-cart">
 		<div class="s-full js-hide-cart"></div>
@@ -300,10 +302,6 @@
 						<a href="{{ url('cart') }}" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
 							View Cart
 						</a>
-
-						<a href="{{ url('cart') }}" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
-							Check Out
-						</a>
 					</div>
 				</div>
 			</div>
@@ -328,6 +326,7 @@
 				<ul class="header-wishlist-wrapitem w-full">
 					@foreach($wishlists as $wish)
 					<form action="{{ route('product-wishlist') }}" method="post">
+						@csrf
 						<li class="header-wishlist-item flex-w flex-t m-b-12">
 							<div class="header-wishlist-item-img">
 								<!-- <img src="{{ asset('/images/item-cart-01.jpg') }}" alt="IMG"> -->
@@ -357,7 +356,7 @@
 										Rp {{ number_format($wish->price, 0, ',', '.') }}
 									</span>
 
-									<button type="submit" class="add-to-cart-btn" data-product-name="White Shirt Pleat" data-product-price="19.00">Add to Cart</button>
+
 								</div>
 							</div>
 						</li>
@@ -402,12 +401,12 @@
 					</li> -->
 				</ul>
 				<div class="w-full">
-					<div class="header-wish-total w-full p-tb-40">
+					<!-- <div class="header-wish-total w-full p-tb-40">
 						5 Other Products in Wishlist
-					</div>
+					</div> -->
 
 					<div class="header-wish-buttons flex-w w-full">
-						<a href="{{ url('wishlist') }}" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+						<a href="{{ url('wishlists') }}" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
 							View Wishlist
 						</a>
 
@@ -419,6 +418,7 @@
 			</div>
 		</div>
 	</div>
+	@endif
 
 
 

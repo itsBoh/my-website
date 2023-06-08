@@ -77,7 +77,7 @@
 					<!-- Menu desktop -->
 					<div class="menu-desktop">
 						<ul class="main-menu">
-							<li class="active-menu">
+							<li>
 								<a href="{{ url('') }}">Home</a>
 							</li>
 

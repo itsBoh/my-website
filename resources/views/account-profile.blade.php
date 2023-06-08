@@ -77,7 +77,7 @@
 					<!-- Menu desktop -->
 					<div class="menu-desktop">
 						<ul class="main-menu">
-							<li class="active-menu">
+							<li>
 								<a href="{{ url('') }}">Home</a>
 							</li>
 
@@ -105,7 +105,7 @@
 							<i class="zmdi zmdi-search"></i>
 						</div> -->
 
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="{{ count($results) }}">
+						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="{{ is_array($results) ? count($results) : 0 }}">
 							<i class="zmdi zmdi-shopping-cart"></i>
 						</div>
 
@@ -524,7 +524,7 @@
 										Address
 									</div>
 									<div class="col-sm-12 col-lg-9">
-										<input type="text" class="text-dark" name="address" value="{{$customer[0]->CUST_ADDRESS}}"required>
+										<input type="text" class="text-dark" name="address" value="{{$customer[0]->CUST_ADDRESS}}" required>
 									</div>
 								</div>
 								<div class="row my-2 align-items-center">
