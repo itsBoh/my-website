@@ -83,7 +83,7 @@
               <p class="u-form-group u-form-text u-text u-block-a714-82" spellcheck="false">We will send a
                 password-reset confirmation email to your email address in 1 - 2 business days.<br></p>
               <div class="u-align-left-xs u-form-group u-form-submit u-block-a714-71">
-                <a href="{{ url('index') }}" onclick="location.href='index';"
+                <a href="{{ url('login') }}" onclick="location.href='login';"
                   class="u-active-palette-1-light-2 u-btn u-btn-round u-btn-submit u-button-style u-custom-font u-font-montserrat u-hover-palette-1-light-1 u-palette-1-dark-2 u-radius-50 u-text-hover-palette-1-light-3 u-block-a714-72"
                   data-animation-name="" data-animation-duration="0" data-animation-delay="0"
                   data-animation-direction="">Send</a>

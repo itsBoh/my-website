@@ -57,6 +57,12 @@
 						Log In
 					</a>
 					@endif
+					</div>
+					@else
+					<a href="{{ url('login') }}" class="flex-c-m trans-04 p-lr-25">
+						Log In
+					</a>
+					@endif
 				</div>
 			</div>
 

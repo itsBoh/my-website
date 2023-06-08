@@ -43,15 +43,14 @@
 					<div class="left-top-bar">
 						Gratis ongkir dengan minimum pembelanjaan Rp 500.000
 					</div>
-					@if(session('customer'))
+@if(session('customer'))
 					<div class="right-top-bar flex-w h-full">
 						<a href="{{ route('account-profile') }}" class="flex-c-m trans-04 p-lr-25">
 							My Account
 						</a>
 						<a href="{{ url('logout') }}" class="flex-c-m trans-04 p-lr-25">
 							Log Out
-						</a>
-					</div>
+
 					@else
 					<a href="{{ url('login') }}" class="flex-c-m trans-04 p-lr-25">
 						Log In
@@ -157,12 +156,18 @@
 
 				<li>
 					<div class="right-top-bar flex-w h-full">
+					@if(session('customer'))
 						<a href="{{ url('account-profile') }}" class="flex-c-m trans-04 p-lr-25">
 							My Account
 						</a>
-						<a href="{{ url('index') }}" class="flex-c-m trans-04 p-lr-25">
+						<a href="{{ url('logout') }}" class="flex-c-m trans-04 p-lr-25">
+							Log Out
+						</a>
+						@else
+						<a href="{{ url('login') }}" class="flex-c-m trans-04 p-lr-25">
 							Log In
 						</a>
+						@endif
 					</div>
 				</li>
 			</ul>
