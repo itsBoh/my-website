@@ -10,6 +10,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\checkoutController;
 use App\Http\Controllers\displayCartProducts;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Trans;
 use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
@@ -104,6 +105,7 @@ Route::post('/product/addToWishlist', [ProductController::class, 'addToWishlist'
 
 
 Route::get('/account/profile', [AccController::class, 'show'])->name('account-profile')->middleware('auth');
+
 Route::post('/account/update', [AccController::class, 'update'])->name('account-update')->middleware('auth');
 Route::get('/account/transaction', [AccController::class, 'showTransaction'])->name('account-transaction')->middleware('auth');
 Route::get('/account/password', [AccController::class, 'showPassword'])->name('account-password')->middleware('auth');
@@ -113,4 +115,5 @@ Route::post('checkout/payment', [checkoutController::class, 'payment'])->name('c
 
 Route::post('/checkout/pay', [CartController::class, 'checkout'])->name('checkout.pay')->middleware('auth');
 
-Route::post('/checkout/finish', [checkoutController::class, 'finish'])->name('checkout.finish')->middleware('auth');
+Route::post('/checkout/finish', [Trans::class, 'check'])->name('checkout.finish')->middleware('auth');
+

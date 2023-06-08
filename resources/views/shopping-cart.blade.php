@@ -547,7 +547,7 @@
 									<div class="p-t-15">
 
 										<div class="bor8 bg0 m-b-12">
-											<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="address" placeholder="{{$address[0]->CUST_ADDRESS}}" required>
+											<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="address" value="{{$address[0]->CUST_ADDRESS}}" required>
 										</div>
 
 									</div>

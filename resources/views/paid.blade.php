@@ -11,7 +11,7 @@
 
 <body bgcolor="#d7d7d7" class="generic-template" style="-moz-osx-font-smoothing: grayscale; -webkit-font-smoothing: antialiased; background-color: #d7d7d7; margin: 0; padding: 0;">
     <!-- Header Start -->
-    <div class="bg-white header" bgcolor="#ffffff" style="background-color: white; width: 100%;">
+    <!-- <div class="bg-white header" bgcolor="#ffffff" style="background-color: white; width: 100%;">
         <table align="center" bgcolor="#ffffff" style="border-left: 10px solid white; border-right: 10px solid white; max-width: 600px; width: 100%;">
             <tr height="80">
                 <td align="left" class="vertical-align-middle" style="color: #464646; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 16px; vertical-align: middle;">
@@ -21,11 +21,11 @@
                 </td>
             </tr>
         </table>
-    </div>
+    </div> -->
     <!-- Header End -->
 
     <!-- Content Start -->
-    <table cellpadding="0" cellspacing="0" cols="1" bgcolor="#d7d7d7" align="center" style="max-width: 600px;">
+    <table cellpadding="0" cellspacing="0" cols="1"  align="center" style="max-width: 600px;">
         <tr bgcolor="#d7d7d7">
             <td height="50" style="color: #464646; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 16px; vertical-align: top;"></td>
         </tr>
@@ -34,7 +34,7 @@
         <tr bgcolor="#d7d7d7">
             <td style="color: #464646; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 16px; vertical-align: top;">
                 <!-- Seperator Start -->
-                <table cellpadding="0" cellspacing="0" cols="1" bgcolor="#d7d7d7" align="center" style="max-width: 600px; width: 100%;">
+                <table cellpadding="0" cellspacing="0" cols="1" align="center" style="max-width: 600px; width: 100%;">
                     <tr bgcolor="#d7d7d7">
                         <td height="30" style="color: #464646; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 16px; vertical-align: top;"></td>
                     </tr>
@@ -111,7 +111,11 @@
                     </tr>
 
                     <tr height="50">
-                        <td colspan="3" style="color: #464646; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 16px; vertical-align: top;"></td>
+                        <td colspan="3" style="color: #464646; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 16px; vertical-align: top;"><a href="{{ url('')}}">Back to Home</a></td>
+                    </tr>
+                    <tr>
+                        
+                        
                     </tr>
 
                 </table>

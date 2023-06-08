@@ -743,11 +743,11 @@
 
 
 							<div class="block2-txt-child2 flex-r p-t-3">
+								<!-- ubah icon hati /////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 								@if(session('customer'))
 								<form action="{{ route('product.addToWishlist')}}" method="post">
 									@csrf
 									<input type="hidden" name="prodid" value="{{$product->PROD_ID}}">
-									<input type="hidden" name="wishlist_id" value="{{$wishlists[0]->wishlist_id}}">
 									<button type="submit">
 										<img class="icon-heart1 dis-block trans-04" src="{{ asset('/images/icons/icon-heart-01.png') }}" alt="ICON">
 									</button>

@@ -418,7 +418,7 @@
 									500.000
 								</div>
 							</div> -->
-							@foreach($trans as $tran)
+							@foreach($trans as $key =>$tran)
 							<div class="row align-items-center" style="height: 100px;">
 								<div class="col-2">
 									<p>

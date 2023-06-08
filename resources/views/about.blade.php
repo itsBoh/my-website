@@ -43,15 +43,20 @@
 					<div class="left-top-bar">
 						Gratis ongkir dengan minimum pembelanjaan Rp 500.000
 					</div>
-
+					@if(session('customer'))
 					<div class="right-top-bar flex-w h-full">
-						<a href="{{ url('account-profile') }}" class="flex-c-m trans-04 p-lr-25">
+						<a href="{{ route('account-profile') }}" class="flex-c-m trans-04 p-lr-25">
 							My Account
 						</a>
-						<a href="{{ url('index') }}" class="flex-c-m trans-04 p-lr-25">
-							Log In
+						<a href="{{ url('logout') }}" class="flex-c-m trans-04 p-lr-25">
+							Log Out
 						</a>
 					</div>
+					@else
+					<a href="{{ url('login') }}" class="flex-c-m trans-04 p-lr-25">
+						Log In
+					</a>
+					@endif
 				</div>
 			</div>
 
@@ -89,7 +94,7 @@
 					</div>
 
 					<!-- Icon header -->
-					<div class="wrap-icon-header flex-w flex-r-m">
+					<!-- <div class="wrap-icon-header flex-w flex-r-m">
 						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
 							<i class="zmdi zmdi-search"></i>
 						</div>
@@ -103,7 +108,7 @@
 							data-notify="0" id="wishlist-btn">
 							<i class="zmdi zmdi-favorite-outline"></i>
 						</div>
-					</div>
+					</div> -->
 				</nav>
 			</div>
 		</div>

@@ -70,12 +70,34 @@ class checkoutController extends Controller
 
         return redirect('/')->with('success', 'Payment successful!');
     }
-    public function finish(Request $request){
+    public function finish(Request $request)
+    {
         $id = session('customer')->CUST_ID;
+        $cartId = $request->input('cartid');
+        $transDate = date('Y-m-d');
+        $transTotalPrice = $request->input('total');
+        $shippingAddress = $request->input('address');
+        $paymentMethod = "card";
+        $paymentStatus = "U";
+        $statusDel = 0;
         $name = DB::select('SELECT CUST_NAME FROM customer WHERE CUST_ID = ?', [$id]);
+
+        // add to table transaction and get the new id
+        $query = "INSERT INTO Order2(CUST_ID, TRANS_DATE, TRANS_TOTAL_PRICE, SHIPPING_ADDRESS, PAYMENT_METHOD, PAYMENT_STATUS, STATUS_DEL) 
+                 VALUES(?, ?, ?, ?, ?, ?, ?)";
+        DB::insert($query, [$id, $transDate, $transTotalPrice, $shippingAddress, $paymentMethod, $paymentStatus, $statusDel]);
+
+
+
+        // delete cart_product
+        // DB::table('cart_product')
+        //     ->where('CART_ID', $cartId)
+        //     ->delete();
+
         $name = $name[0]->CUST_NAME;
         $total = $request->input('total');
-        $date = DB::select('SELECT CURDATE() AS date');
+        $date = $transDate;
+
         return view('paid', compact('name', 'total', 'date'));
     }
 }
