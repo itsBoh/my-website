@@ -614,11 +614,13 @@
 
 						<!--  -->
 						<div class="flex-w flex-m p-l-100 p-t-40 respon7">
-							<div class="flex-m bor9 p-r-10 m-r-11">
-								<a href="{{ url('#') }}" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
+							<form action="{{ route('product.addToWishlist')}}"method="post">
+								@csrf
+								<input type="hidden" name="prodid" value="{{$products[0]->PROD_ID}}">
+								<button type="submit" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2">
 									<i class="zmdi zmdi-favorite"></i>
-								</a>
-							</div>
+								</button>
+							</form>
 
 							<a href="{{ url('#') }}" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
 								<i class="fa fa-facebook"></i>
@@ -758,7 +760,7 @@
 					</div>
 				</div>
 
-				<!-- <div class="col-sm-6 col-lg-3 p-b-50">
+				<div class="col-sm-6 col-lg-3 p-b-50">
 					<h4 class="stext-301 cl0 p-b-30">
 						Newsletter
 					</h4>
@@ -775,7 +777,7 @@
 							</button>
 						</div>
 					</form>
-				</div> -->
+				</div>
 			</div>
 
 			<div class="p-t-40">
@@ -952,9 +954,13 @@
 							<!--  -->
 							<div class="flex-w flex-m p-l-100 p-t-40 respon7">
 								<div class="flex-m bor9 p-r-10 m-r-11">
-									<a href="{{ url('#') }}" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
-										<i class="zmdi zmdi-favorite"></i>
-									</a>
+									<form action="{{ route('product-detail')}}" method="post">
+										@csrf
+										<input type="hidden" name="prodid" value="{{$products[0]->PROD_ID}}">
+										<button type="submit" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2">
+											<i class="zmdi zmdi-favorite"></i>
+										</button>
+									</form>
 								</div>
 
 								<!-- <a href="{{ url('#') }}" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
