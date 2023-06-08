@@ -14,6 +14,7 @@ class Customer extends Model
         'CUST_NAME', 
         'CUST_PASSWORD', 
         'CUST_EMAIL', 
+        'remember_token',
         'CUST_USERNAME', 
         'cust_phone', 
         'CUST_ADDRESS', 

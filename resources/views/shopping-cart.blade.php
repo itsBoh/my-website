@@ -44,7 +44,7 @@
 					</div>
 					@if(session('customer'))
 					<div class="right-top-bar flex-w h-full">
-						<a href="{{ url('account-profile') }}" class="flex-c-m trans-04 p-lr-25">
+					<a href="{{ route('account-profile') }}" class="flex-c-m trans-04 p-lr-25">
 							My Account
 						</a>
 						<a href="{{ url('logout') }}" class="flex-c-m trans-04 p-lr-25">
