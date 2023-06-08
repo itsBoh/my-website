@@ -12,7 +12,7 @@ class formMessage extends Controller
         $data = $request->only(['email', 'msg']);
         $email = $data['email'];
         $message = $data['msg'];
-        DB::insert('insert into saran (email, pesan) values (?, ?)', [$email, $message]);
+        DB::insert('INSERT INTO SARAN (EMAIL, PESAN) VALUES (?, ?)', [$email, $message]);
 
         return view('contact')->with('success', 'Pesan berhasil dikirim');
     }
