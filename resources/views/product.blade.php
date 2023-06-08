@@ -696,90 +696,92 @@
 			<!-- Product -->
 			<div class="row isotope-grid">
 				@foreach($products as $product)
-				<form action="{{ route('product-detail')}}" method="post">
-
-					@csrf
-					<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-						<!-- Block2 -->
-
-						<div class="block2">
-							<div class="block2-pic hov-img0">
-								<!-- <img src="{{ asset('/images/product-01.jpg') }}" alt="IMG-PRODUCT"> -->
-								@php
-								$filename = '/images/product/' . $product->PROD_ID . ' ' . $product->PROD_NAME . '/' . $product->PROD_ID . '_1';
-								$imgsrc = asset($filename . '.png');
-
-								if (!file_exists(public_path($filename . '.png'))) {
-								if (!file_exists(public_path($filename . '.jpg'))) {
-								$imgsrc = asset('/images/unknown.jpg');
-								} else {
-								$imgsrc = asset($filename . '.jpg');
-								}
-								}
-								@endphp
-								<button type="submi">
-									<img src="{{$imgsrc}}" alt="IMG-PRODUCT">
-								</button>
 
 
-								<!-- <button type="submit" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+
+				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+					<!-- Block2 -->
+
+					<div class="block2">
+						<div class="block2-pic hov-img0">
+							<!-- <img src="{{ asset('/images/product-01.jpg') }}" alt="IMG-PRODUCT"> -->
+							@php
+							$filename = '/images/product/' . $product->PROD_ID . ' ' . $product->PROD_NAME . '/' . $product->PROD_ID . '_1';
+							$imgsrc = asset($filename . '.png');
+
+							if (!file_exists(public_path($filename . '.png'))) {
+							if (!file_exists(public_path($filename . '.jpg'))) {
+							$imgsrc = asset('/images/unknown.jpg');
+							} else {
+							$imgsrc = asset($filename . '.jpg');
+							}
+							}
+							@endphp
+							<button type="submi">
+								<img src="{{$imgsrc}}" alt="IMG-PRODUCT">
+							</button>
+
+
+							<!-- <button type="submit" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 								Details
 							</button> -->
-							</div>
-							<input type="hidden" name="prodid" value="{{$product->PROD_ID}}">
-							<div class="block2-txt flex-w flex-t p-t-14">
-								<div class="block2-txt-child1 flex-col-l ">
+							<form action="{{ route('product-detail')}}" method="post">
+								@csrf
+						</div>
+						<input type="hidden" name="prodid" value="{{$product->PROD_ID}}">
+						<div class="block2-txt flex-w flex-t p-t-14">
+							<div class="block2-txt-child1 flex-col-l ">
 
+								<input type="hidden" name="prodid" value="{{$product->PROD_ID}}">
+								<button type="submit" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									{{$product->PROD_NAME}}
+								</button>
+								<button type="submit">
+									<span class="stext-105 cl3">
+										Rp {{number_format($product->PROD_PRICE,0,",",".")}}
+									</span>
+								</button>
+							</div>
+
+							</form>
+							<div class="block2-txt-child2 flex-r p-t-3">
+								@if(session('customer'))
+								@php
+								$wishlistProducts = session('customer')->wishlistProducts;
+								$wishlistProductIds = $wishlistProducts ? $wishlistProducts->pluck('PROD_ID')->toArray() : [];
+								$isInWishlist = in_array($product->PROD_ID, $wishlistProductIds);
+								@endphp
+
+								@if($isInWishlist)
+								<!-- Product is in wishlist -->
+								<button class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+									<img class="icon-heart1 dis-block trans-04" src="{{ asset('/images/icons/icon-heart-02.png') }}" alt="ICON">
+									<img class="icon-heart2 dis-block trans-04 ab-t-l" src="{{ asset('/images/icons/icon-heart-01.png') }}" alt="ICON">
+								</button>
+								@else
+								<!-- Product is not in wishlist -->
+								<form action="{{ route('product.addToWishlist')}}" method="post">
+									@csrf
 									<input type="hidden" name="prodid" value="{{$product->PROD_ID}}">
-									<button type="submit" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-										{{$product->PROD_NAME}}
-									</button>
 									<button type="submit">
-										<span class="stext-105 cl3">
-											Rp {{number_format($product->PROD_PRICE,0,",",".")}}
-										</span>
-									</button>
-								</div>
-
-
-								<div class="block2-txt-child2 flex-r p-t-3">
-									@if(session('customer'))
-									@php
-									$wishlistProducts = session('customer')->wishlistProducts;
-									$wishlistProductIds = $wishlistProducts ? $wishlistProducts->pluck('PROD_ID')->toArray() : [];
-									$isInWishlist = in_array($product->PROD_ID, $wishlistProductIds);
-									@endphp
-
-									@if($isInWishlist)
-									<!-- Product is in wishlist -->
-									<button class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-										<img class="icon-heart1 dis-block trans-04" src="{{ asset('/images/icons/icon-heart-02.png') }}" alt="ICON">
-										<img class="icon-heart2 dis-block trans-04 ab-t-l" src="{{ asset('/images/icons/icon-heart-01.png') }}" alt="ICON">
-									</button>
-									@else
-									<!-- Product is not in wishlist -->
-									<form action="{{ route('product.addToWishlist')}}" method="post">
-										@csrf
-										<input type="hidden" name="prodid" value="{{$product->PROD_ID}}">
-										<button type="submit">
-											<img class="icon-heart1 dis-block trans-04" src="{{ asset('/images/icons/icon-heart-01.png') }}" alt="ICON">
-										</button>
-									</form>
-									@endif
-
-									@else
-									<!-- User is not logged in -->
-									<a href="{{ route('login') }}" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
 										<img class="icon-heart1 dis-block trans-04" src="{{ asset('/images/icons/icon-heart-01.png') }}" alt="ICON">
-										<img class="icon-heart2 dis-block trans-04 ab-t-l" src="{{ asset('/images/icons/icon-heart-02.png') }}" alt="ICON">
-									</a>
-									@endif
-								</div>
+									</button>
+								</form>
+								@endif
 
+								@else
+								<!-- User is not logged in -->
+								<a href="{{ route('login') }}" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+									<img class="icon-heart1 dis-block trans-04" src="{{ asset('/images/icons/icon-heart-01.png') }}" alt="ICON">
+									<img class="icon-heart2 dis-block trans-04 ab-t-l" src="{{ asset('/images/icons/icon-heart-02.png') }}" alt="ICON">
+								</a>
+								@endif
 							</div>
+
 						</div>
 					</div>
-				</form>
+				</div>
+
 				@endforeach
 				<!-- Product -->
 
