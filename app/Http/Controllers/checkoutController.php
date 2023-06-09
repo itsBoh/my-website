@@ -16,20 +16,20 @@ class checkoutController extends Controller
         $shipping_address = $request->input('address');
         $status_del = 0;
         # total price
-        $total = DB::select('SELECT SUM(CP.CART_QTY * P.PROD_PRICE) AS PRICE
-        FROM CART_PRODUCT CP
-        LEFT JOIN CART C ON C.CART_ID = CP.CART_ID
-        LEFT JOIN PRODUCT P ON P.PROD_ID = CP.PROD_ID
-        WHERE C.CUST_ID = ?', [$id]);
+        $total = DB::select('SELECT sum(cp.CART_QTY * p.PROD_PRICE) AS Price
+                        FROM cart_product cp
+                        LEFT JOIN cart c ON c.cart_id = cp.cart_id
+                        LEFT JOIN product p ON p.prod_id = cp.prod_id
+                        WHERE c.cust_id = ?', [$id]);
         $total = $total[0]->Price;
         # shipping address
 
         # create new transaction with date YYYY-MM-DD
-        $query = "INSERT INTO TRANSACTION(TRANS_ID, CUST_ID, TRANS_DATE, TRANS_TOTAL_PRICE, SHIPPING_ADDRESS, PAYMENT_METHOD, PAYMENT_STATUS, STATUS_DEL)
-        VALUES (NULL, ?, CURDATE(), ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO transaction(TRANS_ID, CUST_ID, TRANS_DATE, TRANS_TOTAL_PRICE, SHIPPING_ADDRESS, PAYMENT_METHOD, PAYMENT_STATUS, STATUS_DEL)
+                    VALUES (NULL, ?, CURDATE(), ?, ?, ?, ?, ?)";
         DB::statement($query, [$id, $total, $shipping_address, $payment_method, $payment_status, $status_del]);
         # get transaction id
-        $transId = DB::select('SELECT * FROM TRANSACTION ORDER BY TRANS_ID DESC LIMIT 1;');
+        $transId = DB::select('select * from transaction order by TRANS_ID desc limit 1;');
 
 
         # move product from cart_product to transaction_product
@@ -80,11 +80,11 @@ class checkoutController extends Controller
         $paymentMethod = "card";
         $paymentStatus = "U";
         $statusDel = 0;
-        $name = DB::select('SELECT CUST_NAME FROM CUSTOMER WHERE CUST_ID = ?', [$id]);
+        $name = DB::select('SELECT CUST_NAME FROM customer WHERE CUST_ID = ?', [$id]);
 
         // add to table transaction and get the new id
-        $query = "INSERT INTO ORDER2(CUST_ID, TRANS_DATE, TRANS_TOTAL_PRICE, SHIPPING_ADDRESS, PAYMENT_METHOD, PAYMENT_STATUS, STATUS_DEL) 
-        VALUES(?, ?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO Order2(CUST_ID, TRANS_DATE, TRANS_TOTAL_PRICE, SHIPPING_ADDRESS, PAYMENT_METHOD, PAYMENT_STATUS, STATUS_DEL) 
+                 VALUES(?, ?, ?, ?, ?, ?, ?)";
         DB::insert($query, [$id, $transDate, $transTotalPrice, $shippingAddress, $paymentMethod, $paymentStatus, $statusDel]);
 
 

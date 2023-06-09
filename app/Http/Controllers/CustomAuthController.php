@@ -24,12 +24,12 @@ class CustomAuthController extends Controller
     }
     public function registerUser(Request $request)
     {
-        $query = "INSERT INTO CUSTOMER(CUST_ID, CUST_NAME, CUST_PASSWORD, CUST_EMAIL, CUST_USERNAME, CUST_PHONE, CUST_ADDRESS, CUST_GENDER,STATUS_DEL) VALUES (1,?,?,?,?,?,?,?,0)";
+        $query = "INSERT INTO customer(CUST_ID, CUST_NAME, CUST_PASSWORD, CUST_EMAIL, CUST_USERNAME, CUST_PHONE, CUST_ADDRESS, CUST_GENDER,STATUS_DEL) VALUES (1,?,?,?,?,?,?,?,0)";
         $name = $request->input('CUST_NAME');
         $password = $request->input('CUST_PASSWORD');
         $email = $request->input('CUST_EMAIL');
         $username = $request->input('CUST_USERNAME');
-        $phone = $request->input('CUST_PHONE');
+        $phone = $request->input('cust_phone');
         $address = $request->input('CUST_ADDRESS');
         $gender = $request->input('CUST_GENDER');
         DB::insert($query, [$name, $password, $email, $username, $phone, $address, $gender]);

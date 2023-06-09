@@ -29,26 +29,26 @@ class HomeController extends Controller
         $products = Product::inRandomOrder()->limit(8)->get();
 
         if (session('customer')) {
-            $ID = session('customer')->CUST_ID;
-            $results = DB::select('SELECT P.PROD_NAME, CP.CART_QTY, P.PROD_PRICE, (CP.CART_QTY * P.PROD_PRICE) AS PRICE, CP.CART_ID, P.PROD_ID
-            FROM CART_PRODUCT CP
-            LEFT JOIN CART C ON C.CART_ID = CP.CART_ID
-            LEFT JOIN PRODUCT P ON P.PROD_ID = CP.PROD_ID
-            WHERE C.CUST_ID = ?', [$ID]);
+            $id = session('customer')->CUST_ID;
+            $results = DB::select('SELECT p.PROD_NAME, cp.CART_QTY, p.PROD_PRICE, (cp.CART_QTY * p.PROD_PRICE) AS Price, cp.CART_ID, p.PROD_ID
+                          FROM cart_product cp
+                          LEFT JOIN cart c ON c.cart_id = cp.cart_id
+                          LEFT JOIN product p ON p.prod_id = cp.prod_id
+                          WHERE c.cust_id = ?', [$id]);
 
-            $wishlists = DB::SELECT('SELECT P.PROD_NAME AS NAME, P.PROD_PRICE AS PRICE, P.PROD_ID AS ID
-            FROM WISHLIST_PRODUCT WP
-            LEFT JOIN PRODUCT P
-            ON WP.PROD_ID = P.PROD_ID
-            LEFT JOIN WISHLIST W
-            ON W.WISHLIST_ID = WP.WISHLIST_ID
-            WHERE W.CUST_ID = ?;', [$ID]);
+            $wishlists = DB::select('SELECT p.PROD_NAME as name, p.PROD_PRICE as price, p.PROD_ID as id
+                        FROM wishlist_product wp
+                        left join product p
+                        on wp.PROD_ID = p.PROD_ID
+                        left join wishlist w
+                        on w.WISHLIST_ID = wp.WISHLIST_ID
+                        where w.CUST_ID = ?;', [$id]);
 
-            $total = DB::SELECT('SELECT SUM(CP.CART_QTY * P.PROD_PRICE) AS PRICE
-            FROM CART_PRODUCT CP
-            LEFT JOIN CART C ON C.CART_ID = CP.CART_ID
-            LEFT JOIN PRODUCT P ON P.PROD_ID = CP.PROD_ID
-            WHERE C.CUST_ID = ?', [$ID]);
+            $total = DB::select('SELECT sum(cp.CART_QTY * p.PROD_PRICE) AS Price
+                        FROM cart_product cp
+                        LEFT JOIN cart c ON c.cart_id = cp.cart_id
+                        LEFT JOIN product p ON p.prod_id = cp.prod_id
+                        WHERE c.cust_id = ?', [$id]);
 
             return view('main', compact('results', 'wishlists', 'total', 'products'));
         } else {

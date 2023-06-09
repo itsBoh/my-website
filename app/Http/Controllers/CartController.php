@@ -17,27 +17,27 @@ class CartController extends Controller
     {
         // get id from session
         $id = session('customer')->CUST_ID;
-        $results = DB::select('SELECT P.PROD_NAME, CP.CART_QTY, P.PROD_PRICE, (CP.CART_QTY * P.PROD_PRICE) AS PRICE, CP.CART_ID, P.PROD_ID
-        FROM CART_PRODUCT CP
-        LEFT JOIN CART C ON C.CART_ID = CP.CART_ID
-        LEFT JOIN PRODUCT P ON P.PROD_ID = CP.PROD_ID
-        WHERE C.CUST_ID = ?', [$id]);
+        $results = DB::select('SELECT p.PROD_NAME, cp.CART_QTY, p.PROD_PRICE, (cp.CART_QTY * p.PROD_PRICE) AS Price, cp.CART_ID, p.PROD_ID
+                      FROM cart_product cp
+                      LEFT JOIN cart c ON c.cart_id = cp.cart_id
+                      LEFT JOIN product p ON p.prod_id = cp.prod_id
+                      WHERE c.cust_id = ?', [$id]);
 
-        $wishlists = DB::select('SELECT P.PROD_NAME AS `NAME`, P.PROD_PRICE AS `PRICE`, P.PROD_ID AS `ID`, W.WISHLIST_ID AS WISHLIST_ID
-        FROM WISHLIST_PRODUCT WP
-        LEFT JOIN PRODUCT P
-        ON WP.PROD_ID = P.PROD_ID
-        LEFT JOIN WISHLIST W
-        ON W.WISHLIST_ID = WP.WISHLIST_ID
-        WHERE W.CUST_ID = ?;', [$id]);
+        $wishlists = DB::select('SELECT p.PROD_NAME as `name`, p.PROD_PRICE as `price`, p.PROD_ID as `id`, w.WISHLIST_ID as `wishlist_id`
+                        FROM wishlist_product wp
+                        left join product p
+                        on wp.PROD_ID = p.PROD_ID
+                        left join wishlist w
+                        on w.WISHLIST_ID = wp.WISHLIST_ID
+                        where w.CUST_ID = ?;', [$id]);
 
-        $total = DB::select('SELECT SUM(CP.CART_QTY * P.PROD_PRICE) AS PRICE
-        FROM CART_PRODUCT CP
-        LEFT JOIN CART C ON C.CART_ID = CP.CART_ID
-        LEFT JOIN PRODUCT P ON P.PROD_ID = CP.PROD_ID
-        WHERE C.CUST_ID = ?', [$id]);
+        $total = DB::select('SELECT sum(cp.CART_QTY * p.PROD_PRICE) AS Price
+                        FROM cart_product cp
+                        LEFT JOIN cart c ON c.cart_id = cp.cart_id
+                        LEFT JOIN product p ON p.prod_id = cp.prod_id
+                        WHERE c.cust_id = ?', [$id]);
 
-        $address = DB::select('SELECT CUST_ADDRESS FROM CUSTOMER WHERE CUST_ID = ?', [$id]);
+        $address = DB::select('SELECT CUST_ADDRESS FROM customer WHERE CUST_ID = ?', [$id]);
 
         return view('shopping-cart', compact('results', 'wishlists', 'address', 'total'));
     }
@@ -51,7 +51,7 @@ class CartController extends Controller
                 $cartId = $request->input('cartid')[$key];
                 $prodId = $request->input('prodid')[$key];
 
-                $query = "DELETE FROM CART_PRODUCT WHERE CART_ID = ? AND PROD_ID = ?";
+                $query = "DELETE FROM cart_product WHERE CART_ID = ? AND PROD_ID = ?";
                 DB::statement($query, [$cartId, $prodId]);
             } else{
                 $cartProductId = $request->input('cartid')[$key];
@@ -61,7 +61,7 @@ class CartController extends Controller
                 // Perform any necessary validation or checks here
                 // ...
 
-                $query = "UPDATE CART_PRODUCT SET CART_QTY = ? WHERE CART_ID = ? AND PROD_ID = ?";
+                $query = "UPDATE cart_product SET CART_QTY = ? WHERE CART_ID = ? AND PROD_ID = ?";
                 DB::statement($query, [$quantity, $cartId, $prodId]);
             }
         }
@@ -75,42 +75,42 @@ class CartController extends Controller
         $id = session('customer')->CUST_ID;
         $address = $request->input('address');
 
-        $result2 = DB::select('SELECT SUM(CP.CART_QTY * P.PROD_PRICE) AS PRICE
-        FROM CART_PRODUCT CP
-        LEFT JOIN CART C ON C.CART_ID = CP.CART_ID
-        LEFT JOIN PRODUCT P ON P.PROD_ID = CP.PROD_ID
-        WHERE C.CUST_ID = ?', [$id]);
+        $result2 = DB::select('SELECT sum(cp.CART_QTY * p.PROD_PRICE) AS Price
+                    FROM cart_product cp
+                    LEFT JOIN cart c ON c.cart_id = cp.cart_id
+                    LEFT JOIN product p ON p.prod_id = cp.prod_id
+                    WHERE c.cust_id = ?', [$id]);
 
-        $results = DB::select('SELECT P.PROD_NAME, CP.CART_QTY, P.PROD_PRICE, (CP.CART_QTY * P.PROD_PRICE) AS PRICE, CP.CART_ID, P.PROD_ID
-        FROM CART_PRODUCT CP
-        LEFT JOIN CART C ON C.CART_ID = CP.CART_ID
-        LEFT JOIN PRODUCT P ON P.PROD_ID = CP.PROD_ID
-        WHERE C.CUST_ID = ?', [$id]);
+        $results = DB::select('SELECT p.PROD_NAME, cp.CART_QTY, p.PROD_PRICE, (cp.CART_QTY * p.PROD_PRICE) AS Price, cp.CART_ID, p.PROD_ID
+                    FROM cart_product cp
+                    LEFT JOIN cart c ON c.cart_id = cp.cart_id
+                    LEFT JOIN product p ON p.prod_id = cp.prod_id
+                    WHERE c.cust_id = ?', [$id]);
 
-        $wishlists = DB::select('SELECT P.PROD_NAME AS `NAME`, P.PROD_PRICE AS `PRICE`, P.PROD_ID AS `ID`, W.WISHLIST_ID AS WISHLIST_ID
-        FROM WISHLIST_PRODUCT WP
-        LEFT JOIN PRODUCT P
-        ON WP.PROD_ID = P.PROD_ID
-        LEFT JOIN WISHLIST W
-        ON W.WISHLIST_ID = WP.WISHLIST_ID
-        WHERE W.CUST_ID = ?;', [$id]);
+        $wishlists = DB::select('SELECT p.PROD_NAME as `name`, p.PROD_PRICE as `price`, p.PROD_ID as `id`, w.WISHLIST_ID as `wishlist_id`
+                    FROM wishlist_product wp
+                    left join product p
+                    on wp.PROD_ID = p.PROD_ID
+                    left join wishlist w
+                    on w.WISHLIST_ID = wp.WISHLIST_ID
+                    where w.CUST_ID = ?;', [$id]);
 
-        $total = DB::select('SELECT SUM(CP.CART_QTY * P.PROD_PRICE) AS PRICE
-        FROM CART_PRODUCT CP
-        LEFT JOIN CART C ON C.CART_ID = CP.CART_ID
-        LEFT JOIN PRODUCT P ON P.PROD_ID = CP.PROD_ID
-        WHERE C.CUST_ID = ?', [$id]);
+        $total = DB::select('SELECT sum(cp.CART_QTY * p.PROD_PRICE) AS Price
+                    FROM cart_product cp
+                    LEFT JOIN cart c ON c.cart_id = cp.cart_id
+                    LEFT JOIN product p ON p.prod_id = cp.prod_id
+                    WHERE c.cust_id = ?', [$id]);
 
         return view('shopping-checkout', compact('results', 'result2', 'wishlists', 'total', 'address'));
     }
     public function header()
     {
         $id = session('customer')->CUST_ID;
-        $results = DB::select('SELECT P.PROD_NAME, CP.CART_QTY, P.PROD_PRICE, (CP.CART_QTY * P.PROD_PRICE) AS PRICE, CP.CART_ID, P.PROD_ID
-        FROM CART_PRODUCT CP
-        LEFT JOIN CART C ON C.CART_ID = CP.CART_ID
-        LEFT JOIN PRODUCT P ON P.PROD_ID = CP.PROD_ID
-        WHERE C.CUST_ID = ?', [$id]);
+        $results = DB::select('SELECT p.PROD_NAME, cp.CART_QTY, p.PROD_PRICE, (cp.CART_QTY * p.PROD_PRICE) AS Price, cp.CART_ID, p.PROD_ID
+                      FROM cart_product cp
+                      LEFT JOIN cart c ON c.cart_id = cp.cart_id
+                      LEFT JOIN product p ON p.prod_id = cp.prod_id
+                      WHERE c.cust_id = ?', [$id]);
 
         return view('header', compact('results'));
     }
